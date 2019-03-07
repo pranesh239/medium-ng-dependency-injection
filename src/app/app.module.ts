@@ -1,16 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { USER_API } from './token';
+import { UserComponent } from './users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: USER_API, useValue: 'https://jsonplaceholder.typicode.com/users'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
