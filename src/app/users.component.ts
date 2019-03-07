@@ -14,6 +14,7 @@ import { Component } from '@angular/core';
     {
       provide: ApiService,
       useFactory: (http) => {
+        // THIS WILL RETURN A NEW INSTANCE OF THE PROVIDER WITH DYNAMIC ABITITY TO PASS DIFFERENT URL FROM DIFFERENT COMPONENTS
         return new ApiService(http, 'https://jsonplaceholder.typicode.com/users');
       },
       deps: [
