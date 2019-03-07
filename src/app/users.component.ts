@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { Component } from '@angular/core';
 
@@ -9,7 +11,15 @@ import { Component } from '@angular/core';
   </pre>
   `,
   providers: [
-    {provide: ApiService, useClass: ApiService}
+    {
+      provide: ApiService,
+      useFactory: (http) => {
+        return new ApiService(http, 'https://jsonplaceholder.typicode.com/users');
+      },
+      deps: [
+        HttpClient
+      ]
+    }
   ]
 })
 export class UserComponent {
