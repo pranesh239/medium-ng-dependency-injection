@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './users.component';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UserComponent } from './users.component';
     HttpClientModule
   ],
   providers: [
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

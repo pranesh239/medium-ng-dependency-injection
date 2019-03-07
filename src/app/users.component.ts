@@ -1,7 +1,11 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { Component } from '@angular/core';
+import { User } from './user.interface';
+
+export abstract class UserDetails {
+  abstract getUserData: () => Observable<User[]>;
+}
 
 @Component({
   selector: 'user',
@@ -11,22 +15,14 @@ import { Component } from '@angular/core';
   </pre>
   `,
   providers: [
-    {
-      provide: ApiService,
-      useFactory: (http) => {
-        return new ApiService(http, 'https://jsonplaceholder.typicode.com/users');
-      },
-      deps: [
-        HttpClient
-      ]
-    }
+    { provide: UserDetails, useExisting: ApiService }
   ]
 })
 export class UserComponent {
 
   users$;
 
-  constructor(private api: ApiService) {
+  constructor(private api: UserDetails) {
     this.users$ = this.api.getUserData();
   }
 }
